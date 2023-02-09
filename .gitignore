@@ -1,0 +1,7 @@
+*credentials*
+*token*
+*.swp
+*.pyc
+*secrets*
+base_repo
+rm std_wrapper
