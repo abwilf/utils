@@ -63,6 +63,9 @@ def process_defaults(defaults=[], parser_in=None, str_lists=None, str_lists_type
 
     return args
 
+def srep(s, num_spaces=4):
+    return s.replace(' '*num_spaces, '')
+
 def tens(x):
     # x must be a list of values or a single value
     if isinstance(x, list):
@@ -310,10 +313,12 @@ def read_txt(filename):
     with open(filename, 'r') as f:
         s = f.read()
     return s
+load_txt = read_txt
 
 def write_txt(filename, s):
     with open(filename, 'w') as f:
         f.write(s)
+save_txt = write_txt
         
 def remove_inf(x):
     x[x==-np.inf] = 0

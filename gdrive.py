@@ -1,4 +1,4 @@
-# pip install google-api-python-client gdown
+# pip install google-api-python-client gdown google_auth_oauthlib
 from __future__ import print_function
 import os.path
 from googleapiclient.discovery import build
@@ -53,6 +53,7 @@ def gdrive_up(file_list, folder_id, credentials_path, token_path='/work/awilf/ut
     if isdir(file_list[0]):
         file_list = glob(join(file_list[0],'*'))
         
+    ret_obs = []
     for name in tqdm(file_list):
         if not exists(name):
             print(f'FILENAME {name} does not exist...moving on')
@@ -67,11 +68,13 @@ def gdrive_up(file_list, folder_id, credentials_path, token_path='/work/awilf/ut
             
             if rm_after:
                 rm(name)
+            ret_obs.append(file)
 
         except Exception as e:
             print(f'ALERT: FILE {name} was not uploaded because of an error {traceback.format_exc()}')
             exit()
-
+    return ret_obs
+    
 def download_file(file_id, file_path, service, num_tries=3):
     '''
     if . in file_path, treat it as a whole filename
