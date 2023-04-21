@@ -15,8 +15,15 @@ import pprint
 import re
 import yaml
 from io import StringIO 
+import string
 
 np.cat = np.concatenate
+
+def remove_punctuation(input_string):
+    # create a translation table with all punctuation characters mapped to None
+    translator = str.maketrans('', '', string.punctuation)
+    # use the translation table to remove all punctuation characters
+    return input_string.translate(translator)
 
 def set_seed(seed):
     if seed in [-1,0]:
@@ -617,6 +624,7 @@ def dilation_pad(max_len, max_dilation_rate):
     return to_ret
 
 def all_eq(arr):
+    arr = ar(arr)
     return (arr==arr[0]).all()
 
 def all_idx(idx, axis):
