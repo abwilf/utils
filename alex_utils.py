@@ -16,8 +16,18 @@ import re
 import yaml
 from io import StringIO 
 import string
+import hashlib
 
 np.cat = np.concatenate
+
+
+def hash_string(string):
+    """Returns a hash value of a given string."""
+    string_bytes = string.encode('utf-8')
+    hash_object = hashlib.sha256()
+    hash_object.update(string_bytes)
+    hash_value = hash_object.hexdigest()
+    return hash_value
 
 def remove_punctuation(input_string):
     # create a translation table with all punctuation characters mapped to None
